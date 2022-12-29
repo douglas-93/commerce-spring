@@ -1,5 +1,6 @@
 package com.dolts.springcommerce.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serial;
@@ -16,8 +17,9 @@ public class Category implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-
-    private Set<Product> products = new HashSet<>();
+    @ManyToMany(mappedBy = "categories")
+    @JsonIgnore
+    private final Set<Product> products = new HashSet<>();
 
     public Category() {
     }
