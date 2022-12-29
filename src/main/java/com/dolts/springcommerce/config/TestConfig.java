@@ -2,7 +2,9 @@ package com.dolts.springcommerce.config;
 
 import com.dolts.springcommerce.entities.User;
 import com.dolts.springcommerce.entities.Order;
+import com.dolts.springcommerce.entities.Category;
 import com.dolts.springcommerce.entities.enums.OrderStatus;
+import com.dolts.springcommerce.repositories.CategoryRepository;
 import com.dolts.springcommerce.repositories.OrderRepository;
 import com.dolts.springcommerce.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,8 @@ public class TestConfig implements CommandLineRunner {
     private UserRepository userRepository;
     @Autowired
     private OrderRepository orderRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -31,5 +35,10 @@ public class TestConfig implements CommandLineRunner {
         Order o2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"), u2, OrderStatus.WAITING_PAYMENT);
         Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), u1, OrderStatus.WAITING_PAYMENT);
         orderRepository.saveAll(Arrays.asList(o1, o2, o3));
+
+        Category cat1 = new Category(null, "Electronics");
+        Category cat2 = new Category(null, "Books");
+        Category cat3 = new Category(null, "Computers");
+        categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
     }
 }
